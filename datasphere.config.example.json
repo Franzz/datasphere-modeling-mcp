@@ -1,0 +1,6 @@
+{
+  "host": "https://YOUR-TENANT.eu10.hcs.cloud.sap",
+  "space": "BW_MIGRATION",
+  "scopes": "read,write",
+  "timeoutMs": 120000
+}

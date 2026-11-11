@@ -1,0 +1,20 @@
+{
+  "name": "datasphere-modeling-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SAP Datasphere migration target MCP backed by SAP's official CLI",
+  "type": "module",
+  "engines": { "node": ">=22 <25" },
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node src/stdio.mjs",
+    "cli": "node scripts/cli.mjs",
+    "check": "node --check src/config.mjs && node --check src/cli.mjs && node --check src/tools.mjs && node --check src/stdio.mjs && node --check src/manual-login.mjs && node --check src/browser-login.mjs && node --check build.mjs && node --check scripts/cli.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@sap/datasphere-cli": "2026.22.0",
+    "zod": "4.6.7"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "client-id": "YOUR-OAUTH-CLIENT-ID",
+  "client-secret": "YOUR-OAUTH-CLIENT-SECRET",
+  "authorization-flow": "authorization_code"
+}

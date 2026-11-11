@@ -1,0 +1,8 @@
+node_modules/
+.datasphere/
+datasphere.config.json
+oauth-options.json
+*secrets*.json
+.env
+.env.*
+npm-debug.log*
