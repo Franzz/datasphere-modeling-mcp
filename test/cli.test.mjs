@@ -63,6 +63,16 @@ test('serializes concurrent CLI calls', async () => {
   assert.equal(maxActive, 1);
 });
 
+test('an unanswered SAP prompt is an error even when the CLI exits zero', async () => {
+  let output;
+  const cli = new DatasphereCli(config, async (_, args) => {
+    output = option(args, '--output');
+    return { stdout: '\x1b[2K\x1b[1G\x1b[36m?\x1b[39m Provide a value for option objectname: \x1b7\x1b8' };
+  });
+  await assert.rejects(cli.run(['tasks', 'logs', 'list']), /requested interactive input instead of completing/);
+  await assert.rejects(access(output), { code: 'ENOENT' });
+});
+
 test('does not spawn without a host or for a cancelled queued request', async () => {
   const execute = () => assert.fail('must not spawn');
   await assert.rejects(new DatasphereCli({ ...config, host: undefined }, execute).run(['spaces', 'list']), /DATASPHERE_HOST/);

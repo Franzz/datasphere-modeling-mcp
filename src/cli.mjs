@@ -92,6 +92,12 @@ export class DatasphereCli {
           + (uncertain ? ' The command may have reached the tenant. Check object/task status before retrying.' : '')
           + ' Check sign-in, space privileges, and tenant CLI command help.');
       }
+      // SAP can exit 0 at an unanswered prompt after stdin closes. That did not
+      // complete the command, even though the process return code is successful.
+      const plainStdout = stdout.replace(/\x1b(?:\[[0-?]*[ -/]*[@-~]|[78])/g, '');
+      if (/(?:^|\n)\s*\?\s+Provide a value for option\b/.test(plainStdout)) {
+        throw new Error('Datasphere CLI requested interactive input instead of completing. Check the required command options in tenant CLI help.');
+      }
       let content = stdout;
       if (jsonOutput) {
         try { content = await readFile(output, 'utf8'); } catch (error) {

@@ -62,6 +62,8 @@ test('MCP creates a draft, deploys an update, paginates inventory, and uses SAP 
   await client.callTool({ name: 'datasphere_run_task_chain', arguments: { technical_name: 'LOAD', input_parameters: { YEAR: '2026' } } });
   assert.ok(commands.at(-1).includes('--object=LOAD'));
   assert.ok(commands.at(-1).includes('--input-parameters={"YEAR":"2026"}'));
+  await client.callTool({ name: 'datasphere_list_task_logs', arguments: { technical_name: 'LOAD' } });
+  assert.ok(commands.at(-1).includes('--objectname=LOAD'));
   await client.callTool({ name: 'datasphere_get_task_log', arguments: { log_id: '123' } });
   assert.ok(commands.at(-1).includes('--log-id=123'));
   await client.callTool({ name: 'datasphere_delete_object', arguments: { object_type: 'local-tables', technical_name: 'TEST' } });

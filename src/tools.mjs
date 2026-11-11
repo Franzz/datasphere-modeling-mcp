@@ -81,7 +81,7 @@ export function createTools(cli, config) {
       description: 'List execution history and run IDs for an object, such as a task chain.',
       schema: z.object({ space: spaceField, technical_name: identifier }),
       annotations: readAnnotations,
-      run: (args, extra) => cli.run(['tasks', 'logs', 'list', `--space=${spaceOf(args)}`, `--object=${args.technical_name}`], { signal: extra.signal }),
+      run: (args, extra) => cli.run(['tasks', 'logs', 'list', `--space=${spaceOf(args)}`, `--objectname=${args.technical_name}`], { signal: extra.signal }),
     },
     {
       name: 'datasphere_get_task_log', scope: 'read',
