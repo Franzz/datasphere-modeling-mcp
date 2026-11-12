@@ -110,6 +110,8 @@ To deploy, call update with the full reviewed definition and `deploy=true`. Ther
 
 ## Migration workflow and limits
 
+For new migrations, prefer Replication Flows for ingesting data from connected sources and Transformation Flows for transforming data between local tables. Data Flows remain supported for existing workflows. Delta loading must be configured on supported sources and tables; choosing a flow type alone does not enable it. See [SAP's flow guidance](https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/34ae0a2ea6e94483b19f632a2843d56d.html).
+
 1. Read the source BW model through the BW MCP.
 2. Read a suitable Datasphere template through this MCP and generate its target CSN/JSON, including required annotations and editor settings.
 3. Create sources before dependent views and analytic models. Connections for remote tables must already exist.

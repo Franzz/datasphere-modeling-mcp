@@ -9,7 +9,7 @@ export const objectTypes = [
 ];
 const identifier = z.string().min(1).max(256).regex(/^(?!-)[^\x00-\x1f]+$/, 'Invalid identifier');
 const spaceField = identifier.optional().describe('Space ID; defaults to DATASPHERE_SPACE when configured.');
-const objectType = z.enum(objectTypes);
+const objectType = z.enum(objectTypes).describe('Prefer replication-flows for source ingestion and transformation-flows for local-table transformations. Data flows remain supported for existing workflows.');
 const targetFields = { space: spaceField, object_type: objectType, technical_name: identifier };
 const definitionField = z.record(z.string(), z.unknown()).refine((value) => Object.keys(value).length > 0, 'Definition cannot be empty');
 const readAnnotations = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true };
